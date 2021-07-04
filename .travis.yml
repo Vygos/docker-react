@@ -5,6 +5,7 @@ services:
 before_install:
   - docker build -t vygos/docker-react -f Dockerfile.dev .
   - docker build -t vygos/docker-react-prod .
+  - docker run -d -e TEST=$TEST vygs/docker-react-prod
 
 script:
   - docker run -e CI=true vygos/docker-react npm run test
@@ -19,4 +20,3 @@ deploy:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  script: docker run -e TEST=$TEST ASDF
