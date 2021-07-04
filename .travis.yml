@@ -4,10 +4,12 @@ services:
 
 before_install:
   - docker build -t vygos/docker-react -f Dockerfile.dev .
+  - docker build -t -e TEST=$TEST vygos/docker-react-prod .
 
 
 script:
   - docker run -e CI=true vygos/docker-react npm run test
+  - docker run vygos/docker-react-prod
 
 deploy:
   provider: elasticbeanstalk
