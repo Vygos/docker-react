@@ -9,8 +9,6 @@ before_install:
 
 script:
   - docker run -e CI=true vygos/docker-react npm run test
-  - docker run -e TEST=$TEST vygos/docker-react-prod
-
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
@@ -22,4 +20,4 @@ deploy:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-
+  script: docker run -e TEST=$TEST vygos/docker-react-prod
